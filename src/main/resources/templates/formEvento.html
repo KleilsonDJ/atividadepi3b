@@ -1,36 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Eventos</title>
+    <meta charset="UTF-8">
+    <title>Adicionar Evento</title>
 </head>
 <body>
-	<h1>Adicionar Evento</h1>
+    <h1>Adicionar Evento</h1>
 
-	<form action="">
-
-		<div>
-			<label>Nome:</label> <input type="text" name="nome">
-		</div>
-
-		<div>
-			<label>Local:</label> <input type="text" name="local">
-		</div>
-
-		<div>
-			<label>Data:</label> <input type="text" name="data">
-		</div>
-
-		<div>
-			<label>Horário:</label> <input type="text" name="horario">
-		</div>
-		
-		<div>
-			<button type="submit">Salvar</button>
-			<button type="reset">Lipar</button>
-		</div>
-
-	</form>
-
+    <form action="/eventos" method="post"> <!-- Direciona o Formulario para pag -->
+        <div>
+            <label>Nome:</label>
+            <input type="text" name="nome" required>
+        </div>
+        <div>
+            <label>Local:</label>
+            <input type="text" name="local" required>
+        </div>
+        <div>
+            <label>Data:</label>
+            <input type="text" name="data" required>
+        </div>
+        <div>
+            <label>Horário:</label>
+            <input type="text" name="horario" required>
+        </div>
+        <div>
+            <button type="submit">Salvar</button>
+            <button type="reset">Limpar</button>
+        </div>
+    </form>
 </body>
 </html>

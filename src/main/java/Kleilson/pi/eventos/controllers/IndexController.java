@@ -4,11 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class indexCotroller {
-	
-	@RequestMapping("/")
-	public String index(){
-		System.out.println("Chamou o método index");
-		return"home";
-	}
+public class IndexController {
+
+    @RequestMapping("/")
+    public String index() {
+        System.out.println("Chamou o método index");
+        return "home"; 
+    }
 }
