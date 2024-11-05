@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <!-- Compiled and minified CSS -->
+   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <meta charset="UTF-8">
     <title>Adicionar Evento</title>
 </head>
 <body>
-    <div th:replace="menu :: menu"></div>
+  
+    <div th:replace="~{menu :: menu}"></div>
 
     <div class="container">
         <h1>Lista de eventos</h1>
 
-        <table>
+        <table class="highlight">
             <thead>
                 <tr>
                     <th>Id</th>
@@ -25,7 +26,11 @@
             <tbody>
                 <tr th:each="e : ${eventos}">
                     <td th:text="${e.id}">1</td>
-                    <td th:text="${e.nome}">Nome do Evento</td>
+                    <td>
+                        <a th:href="@{/eventos/{id}(id=${e.id})}">
+                            <span th:text="${e.nome}">Nome do Evento</span>
+                        </a>
+                    </td>
                     <td th:text="${e.local}">Local do Evento</td>
                     <td th:text="${e.data}">Data do Evento</td>
                     <td th:text="${e.horario}">Horário do Evento</td>
