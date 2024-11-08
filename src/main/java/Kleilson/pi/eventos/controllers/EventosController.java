@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import Kleilson.pi.eventos.models.Convidado;
 import Kleilson.pi.eventos.models.Evento;
+import Kleilson.pi.eventos.repositories.ConvidadoRepository;
 import Kleilson.pi.eventos.repositories.EventoRepository;
 
 @Controller
@@ -20,6 +22,8 @@ public class EventosController {
 
     @Autowired
     private EventoRepository er;
+    @Autowired
+    private ConvidadoRepository cr;
 
     @GetMapping("/form")
     public String form() {
@@ -54,5 +58,23 @@ public class EventosController {
         md.addObject("evento", evento);
 
         return md;
+    }
+    
+    @PostMapping("/{idEventos}")
+    public String salvaConvidado(@PathVariable Long idEventos, Convidado convidado) {
+    	
+    	System.out.println("Id eventos" +idEventos);
+    	System.out.println(convidado);
+    	
+    	Optional<Evento> opt = er.findById(idEventos);
+    	if(opt.isEmpty()) {
+    		return "redirect:/eventos";
+    	}
+    	Evento evento = opt.get();
+    	convidado.setEvento(evento);
+    	
+    	cr.save(convidado);
+    	
+    	return "redirect:/eventos/{idEventos}";
     }
 }
