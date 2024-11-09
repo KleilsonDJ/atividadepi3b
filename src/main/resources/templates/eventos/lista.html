@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -7,6 +7,7 @@
     <title>Adicionar Evento</title>
 </head>
 <body>
+    <!-- Incluindo o menu -->
     <div th:replace="menu :: menu"></div>
 
     <div class="container">
@@ -23,9 +24,11 @@
                 </tr>
             </thead>
             <tbody>
+                <!-- Looping pelos eventos -->
                 <tr th:each="e : ${eventos}">
                     <td th:text="${e.id}">1</td>
-                    <td th:text="${e.nome}">Nome do Evento</td>
+                    <!-- Link para o evento, usando th:href -->
+                    <td><a th:href="@{/eventos/{id}(id=${e.id})}" th:text="${e.nome}">Nome do Evento</a></td>
                     <td th:text="${e.local}">Local do Evento</td>
                     <td th:text="${e.data}">Data do Evento</td>
                     <td th:text="${e.horario}">Horário do Evento</td>
