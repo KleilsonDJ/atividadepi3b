@@ -33,7 +33,7 @@ public class EventosController {
     @PostMapping
     public String adicionar(Evento evento) {
         er.save(evento);
-        return "redirect:/eventos"; // Verifique se existe um método GetMapping("/") em "/eventos"
+        return "redirect:/eventos"; 
     }
 
     @GetMapping
@@ -56,7 +56,10 @@ public class EventosController {
         Evento evento = opt.get();
         md.setViewName("eventos/detalhes");
         md.addObject("evento", evento);
-
+        
+        List<Convidado> convidados = cr.findByEvento(evento);
+        md.addObject("convidados", convidados);
+        
         return md;
     }
     
