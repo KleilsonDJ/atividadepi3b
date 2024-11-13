@@ -1,40 +1,46 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <meta charset="UTF-8">
-    <title>Adicionar Evento</title>
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+<meta charset="UTF-8">
+<title>Adicionar Evento</title>
 </head>
 <body>
-    <!-- Incluindo o menu -->
-    <div th:replace="menu :: menu"></div>
+	<!-- Incluindo o menu -->
+	<div th:replace="menu :: menu"></div>
 
-    <div class="container">
-        <h1>Lista de eventos</h1>
+	<div class="container">
+		<h1>Lista de eventos</h1>
 
-        <table class="highlight">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Nome</th>
-                    <th>Local</th>
-                    <th>Data</th>
-                    <th>Horário</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Looping pelos eventos -->
-                <tr th:each="e : ${eventos}">
-                    <td th:text="${e.id}">1</td>
-                    <!-- Link para o evento, usando th:href -->
-                    <td><a th:href="@{/eventos/{id}(id=${e.id})}" th:text="${e.nome}">Nome do Evento</a></td>
-                    <td th:text="${e.local}">Local do Evento</td>
-                    <td th:text="${e.data}">Data do Evento</td>
-                    <td th:text="${e.horario}">Horário do Evento</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+		<table class="highlight">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nome</th>
+					<th>Local</th>
+					<th>Data</th>
+					<th>Horário</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- Looping pelos eventos -->
+				<tr th:each="e : ${eventos}">
+					<td th:text="${e.id}">1</td>
+					<td><a th:href="@{/eventos/{id}(id=${e.id})}"><samp
+								th:text="${e.nome}">Nome do Evento</samp></a></td>
+					<td th:text="${e.local}">Local do Evento</td>
+					<td th:text="${e.data}">Data do Evento</td>
+					<td th:text="${e.horario}">Horário do Evento</td>
+					<td><a th:href="@{/eventos/{id}/remover(id=${e.id})}"><i class="material-icons">delete</i></a></td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
 </body>
 </html>

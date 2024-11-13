@@ -33,7 +33,7 @@ public class EventosController {
     @PostMapping
     public String adicionar(Evento evento) {
         er.save(evento);
-        return "redirect:/eventos"; // Verifique se existe um método GetMapping("/") em "/eventos"
+        return "redirect:/eventos"; 
     }
 
     @GetMapping
@@ -56,7 +56,10 @@ public class EventosController {
         Evento evento = opt.get();
         md.setViewName("eventos/detalhes");
         md.addObject("evento", evento);
-
+        
+        List<Convidado> convidados = cr.findByEvento(evento);
+        md.addObject("convidados", convidados);
+        
         return md;
     }
     
@@ -77,4 +80,32 @@ public class EventosController {
     	
     	return "redirect:/eventos/{idEventos}";
     }
+    @GetMapping("/{id}/remover")
+    public String apagarEvento(@PathVariable Long id) {
+    	Optional<Evento> opt = er.findById(id);
+    	if(!opt.isEmpty()) {
+    		Evento evento = opt.get();
+    		
+    		List<Convidado> convidados = cr.findByEvento(evento);
+    		
+    		cr.deleteAll(convidados);
+    		er.delete(evento);
+    	}
+    	return "redirect:/eventos";
+    }
+    
+    @GetMapping("/{idEventos}/convidados/{idConvidado}/remover")
+    public String removerConvidado(@PathVariable Long idEventos, @PathVariable Long idConvidado) {
+        Optional<Convidado> optConvidado = cr.findById(idConvidado);
+        if (optConvidado.isPresent()) {
+            Convidado convidado = optConvidado.get();
+            // Verifique se o convidado está associado ao evento correto
+            if (convidado.getEvento().getId().equals(idEventos)) {
+                cr.delete(convidado);  // Remove o convidado do evento
+            }
+        }
+        return "redirect:/eventos/" + idEventos;  // Redireciona para os detalhes do evento
+    }
+    
+
 }
